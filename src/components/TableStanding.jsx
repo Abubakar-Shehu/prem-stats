@@ -1,13 +1,20 @@
 export const TableStanding = () => {
   return (
-  <table>
+  <table className="table standing-table">
     <thead>
       <tr>
-        <th>Position</th>
-        <th>Team</th>
-        <th>Points</th>
+        <th className="position">Position</th>
+        <th className="team">Team</th>
+        <th className="points">Points</th>
       </tr>
     </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
   </table>
   );
 }

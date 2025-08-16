@@ -4,7 +4,7 @@ import {
   HomeBar, 
   KeyStats, 
   QuickLinks, 
-  RecentResult,
+  RecentResults,
   TableStanding,
   TeamCards,
   TeamHeader
@@ -17,7 +17,7 @@ function App() {
       <HomeBar />
       <TeamCards />
       <QuickLinks />
-      <RecentResult />
+      <RecentResults />
       <TeamHeader />
       <KeyStats />
       <FixtureList />

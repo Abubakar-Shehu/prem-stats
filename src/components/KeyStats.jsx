@@ -1,6 +1,6 @@
 export const KeyStats = () => {
   return (
-  <section>
+  <section className="stats">
     <div>PPG</div>
     <div>Goal Difference</div>
   </section>

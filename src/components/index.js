@@ -3,7 +3,7 @@ export { Footer } from "./Footer";
 export { HomeBar } from "./HomeBar";
 export { KeyStats } from "./KeyStats";
 export { QuickLinks } from "./QuickLinks";
-export { RecentResult } from "./RecentResult";
+export { RecentResults } from "./RecentResults";
 export { TableStanding } from "./TableStanding";
 export { TeamCards } from "./TeamCards";
 export { TeamHeader } from "./TeamHeader";

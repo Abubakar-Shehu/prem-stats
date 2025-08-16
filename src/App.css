@@ -1,0 +1,118 @@
+/* Common names/tags */
+
+.nav {
+  display: flex;
+  column-gap: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+.table thead {
+  background-color: #f1f1f1;
+  padding: 10px 14px;
+}
+
+/* Header CSS */
+
+.whole-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+}
+
+.select-box {
+  height: 30px;
+}
+
+/* Team Cards CSS */
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  border-radius: 5px;
+  align-items: center;
+}
+
+/* Links CSS */
+
+.links {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  border-radius: 5px;
+  align-items: center;
+}
+
+/* Recent Result CSS */
+
+.results {
+  display: flex;
+  column-gap: 7px;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.rounded-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+}
+
+/* Recent Result CSS */
+
+.team-header {
+  display: flex;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-form {
+  display: flex;
+  column-gap: 15px;
+}
+
+/* Key Stats CSS */
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.stats div {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Fixture List CSS */

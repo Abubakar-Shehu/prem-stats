@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
    <>
-    <nav>
+    <nav className="nav footer-nav">
       <a href="">About</a>
       <a href="">Contact</a>
     </nav>
