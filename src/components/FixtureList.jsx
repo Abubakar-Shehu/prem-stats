@@ -3,10 +3,10 @@ export const FixtureList = () => {
     <table>
       <thead>
         <tr>
-          <td>Date</td>
-          <td>Opponent</td>
-          <td>Home / Away</td>
-          <td>Competition</td>
+          <th>Date</th>
+          <th>Opponent</th>
+          <th>Home / Away</th>
+          <th>Competition</th>
         </tr>
       </thead>
     </table>
