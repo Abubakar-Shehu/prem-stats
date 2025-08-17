@@ -2,7 +2,7 @@
 
 .nav {
   display: flex;
-  column-gap: 10px;
+  column-gap: 50px;
 }
 
 a {
@@ -15,11 +15,47 @@ a {
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #ccc;
+  width: 100%;
 }
 
 .table thead {
   background-color: #f1f1f1;
   padding: 10px 14px;
+}
+
+.table-data {
+  text-align: center;
+}
+
+/* Main Body CSS */
+
+.main-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Left Bar CSS */
+
+.left-bar {
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+/* Mid Bar CSS */
+
+.mid-bar {
+  border: 1px solid;
+  border-radius: 5px;
+  flex-grow: 3;
+}
+
+/* Right Bar CSS */
+
+.right-bar {
+  border: 1px solid;
+  border-radius: 5px;
+  flex-grow: 2;
 }
 
 /* Header CSS */
@@ -28,6 +64,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
 .header {
@@ -45,9 +82,9 @@ a {
 .cards {
   display: flex;
   flex-direction: column;
-  border: 1px solid;
-  border-radius: 5px;
   align-items: center;
+  border-bottom: 1px solid;
+  padding: 10px;
 }
 
 /* Links CSS */
@@ -55,9 +92,9 @@ a {
 .links {
   display: flex;
   flex-direction: column;
-  border: 1px solid;
-  border-radius: 5px;
   align-items: center;
+  border-bottom: 1px solid;
+  padding: 10px;
 }
 
 /* Recent Result CSS */
@@ -66,8 +103,7 @@ a {
   display: flex;
   column-gap: 7px;
   justify-content: center;
-  border: 1px solid;
-  border-radius: 5px;
+  padding: 10px;
 }
 
 .rounded-div {
@@ -80,12 +116,13 @@ a {
   width: 75px;
 }
 
-/* Recent Result CSS */
+/* Team Header CSS */
 
 .team-header {
   display: flex;
-  border: 1px solid;
-  border-radius: 5px;
+  justify-content: center;
+  border-bottom: 1px solid;
+  padding: 10px;
 }
 
 .logo {
@@ -102,10 +139,10 @@ a {
 
 .stats {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  border: 1px solid;
-  border-radius: 5px;
+  border-bottom: 1px solid;
   padding: 10px;
 }
 
@@ -116,3 +153,24 @@ a {
 }
 
 /* Fixture List CSS */
+
+.fixture-table {
+  display: flex;
+  justify-content: center;
+}
+
+/* Table standing CSS */
+
+.standing-table {
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer CSS */
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+}
