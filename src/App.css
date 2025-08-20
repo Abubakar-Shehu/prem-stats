@@ -9,6 +9,12 @@ a {
   text-decoration: none;
 }
 
+img {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+}
+
 .table {
   border-collapse: separate;
   border-spacing: 0;
@@ -120,9 +126,9 @@ a {
 
 .team-header {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   border-bottom: 1px solid;
-  padding: 10px;
+  column-gap: 50px;
 }
 
 .logo {
@@ -174,3 +180,5 @@ a {
   gap: 100px;
   align-items: center;
 }
+
+/* No team selected */

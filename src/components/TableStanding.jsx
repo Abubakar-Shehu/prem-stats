@@ -1,4 +1,16 @@
-export const TableStanding = () => {
+export const TableStanding = ({table}) => {
+
+  const currentTable = table.map(place => {
+    return (
+    <tbody key={place.team.id}>
+        <tr className="table-data">
+          <td>{place.position}</td>
+          <td>{place.team.shortName}</td>
+          <td>{place.points}</td>
+        </tr>
+      </tbody>)
+  });
+
   return (
   <div className="standing-table">
     <table className="table">
@@ -9,13 +21,7 @@ export const TableStanding = () => {
           <th>Points</th>
         </tr>
       </thead>
-      <tbody>
-        <tr className="table-data">
-          <td>1</td>
-          <td>Man city</td>
-          <td>3</td>
-        </tr>
-      </tbody>
+      {currentTable}
     </table>
   </div>
   );

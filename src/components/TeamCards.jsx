@@ -1,9 +1,17 @@
-export const TeamCards = () => {
+export const TeamCards = ({selectedTeam}) => {
   return (
   <section className="cards">
-    <img src="" alt="" />
-    <h2>Team name</h2>
-    <p>Manager</p>
+    {
+      selectedTeam ? (
+        <>
+          <img src={selectedTeam.crest} alt="Crest of the team"/>
+          <h2>{selectedTeam.shortName}</h2>
+          <p>{selectedTeam.coach.name}</p>
+        </>
+      )  : (
+          <h2>No team selected</h2>
+      )
+    }
   </section>
   );
 }
