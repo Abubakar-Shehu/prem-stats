@@ -26,7 +26,7 @@ function App() {
 
 
   useEffect(() => {
-    const url = 'http://localhost:8080/api/prem';
+    const url = `${import.meta.env.VITE_URL}/api/prem`;
     const options = { 
       method: 'GET'
     };
@@ -46,15 +46,19 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const url = 'http://localhost:8080/api/prem/table';
+    const url = `${import.meta.env.VITE_URL}/api/prem/table`;
     const options = { 
       method: 'GET'
     };
 
     const getTableStanding = async () => {
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(url, options); 
+        console.log(response);
+               
         const result = await response.json();
+        console.log(result);
+        
         const data = result.standings[0].table;
         setTable(data)
       } catch (error) {
@@ -69,7 +73,7 @@ function App() {
     if (!selectedTeam?.id) return;
 
     const team = selectedTeam.id
-    const url = `http://localhost:8080/api/prem/matches/${team}`;
+    const url = `${import.meta.env.VITE_URL}/api/prem/matches/${team}`;
     const options = { 
       method: 'GET'
     };
@@ -93,7 +97,7 @@ function App() {
     const team = teams.find(t => String(t.id) === selectedTeamId);  // Find the team by ID
     setSelectedTeam(team);  // Update the selected team state
   };
-
+  
   return (
     <>
       <HomeBar teams={teams} onTeamChange={handleTeamChange}/>
