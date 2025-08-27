@@ -53,11 +53,8 @@ function App() {
 
     const getTableStanding = async () => {
       try {
-        const response = await fetch(url, options); 
-        console.log(response);
-               
+        const response = await fetch(url, options);                
         const result = await response.json();
-        console.log(result);
         
         const data = result.standings[0].table;
         setTable(data)
