@@ -95,6 +95,8 @@ function App() {
     setSelectedTeam(team);  // Update the selected team state
   };
   
+  console.log(import.meta.env)
+
   return (
     <>
       <HomeBar teams={teams} onTeamChange={handleTeamChange}/>
