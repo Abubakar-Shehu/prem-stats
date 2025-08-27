@@ -9,14 +9,21 @@ import {
   TeamCards,
   TeamHeader
 } from './components'
+import { Modal } from './routes/modal';
 import './App.css'
 import { useEffect, useState } from 'react'
 
 function App() {
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [table, setTable] = useState([]);
+  const [teamMatches, setTeamMatches] = useState([]);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
 
   useEffect(() => {
     const url = 'http://localhost:8080/api/prem';
@@ -58,6 +65,29 @@ function App() {
     getTableStanding();
   }, [])
 
+  useEffect(() => {
+    if (!selectedTeam?.id) return;
+
+    const team = selectedTeam.id
+    const url = `http://localhost:8080/api/prem/matches/${team}`;
+    const options = { 
+      method: 'GET'
+    };
+
+    const getGames = async () => {
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        const data = result.matches
+        setTeamMatches(data)
+      } catch (error) {
+        console.error('Error fetching data', error);
+      }
+    } 
+
+    getGames();
+  }, [selectedTeam])
+
   const handleTeamChange = (event) => {
     const selectedTeamId = event.target.value;
     const team = teams.find(t => String(t.id) === selectedTeamId);  // Find the team by ID
@@ -70,19 +100,22 @@ function App() {
       <div className='main-body'>
         <section className='left-bar'>
           <TeamCards selectedTeam={selectedTeam}/>
-          <QuickLinks />
+          <QuickLinks onLinkClick={openModal}/>
           <RecentResults />
         </section>
         <section className='mid-bar'>
           <TeamHeader selectedTeam={selectedTeam}/>
           <KeyStats />
-          <FixtureList />  
+          <FixtureList teamMatches={teamMatches} selectedTeam={selectedTeam}/>  
         </section>
         <section className='right-bar'>
           <TableStanding table={table}/>
         </section>
       </div>
       <Footer />
+      {isModalOpen && (
+        <Modal onClose={closeModal} />
+      )}
     </>
   )
 }

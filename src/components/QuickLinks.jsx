@@ -1,9 +1,9 @@
-export const QuickLinks = () => {
+export const QuickLinks = ({onLinkClick}) => {
   return (
   <section className="links">
-    <a href="">Roster</a>
-    <a href="">Standing</a>
-    <a href="">News</a>
+    <button onClick={onLinkClick}>Roster</button>
+    <button onClick={onLinkClick}>Standing</button>
+    <button onClick={onLinkClick}>News</button>
   </section>
   );
 }

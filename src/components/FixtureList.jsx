@@ -1,4 +1,34 @@
-export const FixtureList = () => {
+export const FixtureList = ({ teamMatches, selectedTeam }) => {
+  const futureMatches = teamMatches.map (matches => {
+    return (
+      <tbody key={matches.id}>
+          <tr className="table-data">
+            <td>{new Date(matches.utcDate).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "2-digit"
+            })}</td>
+            {
+              selectedTeam.id === matches.awayTeam.id && 
+              <>
+                <td>{matches.homeTeam.shortName}</td>
+                <td>Away</td>
+              </>
+            }
+            {
+              selectedTeam.id === matches.homeTeam.id && 
+              <>
+                <td>{matches.awayTeam.shortName}</td>
+                <td>Home</td>
+              </>
+            }
+            <td>
+              <img src={matches.competition.emblem} alt="Competition Logo" className="fixture-logo"/>
+            </td>
+          </tr>
+        </tbody>)
+  });
+
   return (
     <div className="fixture-table">
       <table className="table">
@@ -10,14 +40,7 @@ export const FixtureList = () => {
             <th>Competition</th>
           </tr>
         </thead>
-        <tbody>
-          <tr className="table-data">
-            <td>10-Aug</td>
-            <td>Arsenal</td>
-            <td>Home</td>
-            <td>Prem</td>
-          </tr>
-        </tbody>
+        {futureMatches}
       </table>
     </div>
   );
