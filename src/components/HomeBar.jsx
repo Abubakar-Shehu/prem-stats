@@ -1,19 +1,24 @@
-export const HomeBar = ({teams, onTeamChange}) => {
-
-  const currentTeams = teams.map(team => {
-    return (
-      <option key={team.id} value={team.id}> {/* assuming 'id' is unique */}
-        {team.name} {/* assuming each team has a 'name' */}
-      </option>
-    );
-  });
+export const HomeBar = ({ teams, onTeamChange }) => {
+  const currentTeams = teams.map(team => (
+    <option key={team.id} value={team.id}>
+      {team.name}
+    </option>
+  ));
 
   return (
     <div className="whole-head">
       <div className="header">
         <h1>Favourite Team :</h1>
-        {/* <label htmlFor="teams">Choose a team:</label> */}
-        <select id="teams" name="teams" className="select-box" onChange={onTeamChange}>
+        <select
+          id="teams"
+          name="teams"
+          className="select-box"
+          defaultValue="" // ensure no pre-selection
+          onChange={onTeamChange}
+        >
+          <option value="" disabled>
+            -- Choose a team --
+          </option>
           {currentTeams}
         </select>
       </div>
@@ -23,4 +28,4 @@ export const HomeBar = ({teams, onTeamChange}) => {
       </nav>
     </div>
   );
-}
+};
