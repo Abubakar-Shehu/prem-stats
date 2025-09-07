@@ -104,7 +104,7 @@ function App() {
         <section className='left-bar'>
           <TeamCards selectedTeam={selectedTeam}/>
           <QuickLinks onLinkClick={openModal}/>
-          <RecentResults />
+          <RecentResults teamMatches={teamMatches} selectedTeam={selectedTeam} />
         </section>
         <section className='mid-bar'>
           <TeamHeader selectedTeam={selectedTeam}/>
