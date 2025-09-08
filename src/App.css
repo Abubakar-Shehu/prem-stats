@@ -305,19 +305,49 @@ img {
 .links {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  align-items: stretch;
+  gap: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 20px 15px;
   margin-bottom: 15px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.08) 0%, rgba(245, 87, 108, 0.08) 100%);
   transition: all 0.3s ease;
   font-weight: 500;
 }
 
 .links:hover {
-  background: linear-gradient(135deg, rgba(240, 147, 251, 0.2) 0%, rgba(245, 87, 108, 0.2) 100%);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.12) 0%, rgba(245, 87, 108, 0.12) 100%);
+}
+
+/* QuickLinks buttons */
+.links button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.25);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.links button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(102, 126, 234, 0.35);
+}
+
+.links button:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+.links button:focus {
+  outline: 2px solid rgba(102, 126, 234, 0.5);
+  outline-offset: 2px;
 }
 
 /* Recent Result CSS */
@@ -501,11 +531,18 @@ img {
   border-radius: 12px;
 }
 
+/* Beautify modal surface */
+.photo-details-modal {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.98) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
 /* Mobile responsive modal */
 @media (max-width: 768px) {
   .photo-details-modal {
-    width: 90%;
-    height: 70%;
+    width: 92%;
+    height: 72%;
     top: 50%;
     transform: translate(-50%, -50%);
   }
@@ -514,7 +551,7 @@ img {
 .photo-details-modal__close-button {
   background-color: white;
   border: none;
-  color: white;
+  /* color: white; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -522,6 +559,20 @@ img {
   cursor: pointer;
   margin-left: 16px;
   margin-top: 16px;
+}
+
+/* Modern close button */
+.photo-details-modal__close-button {
+  /* background: #fff; */
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.photo-details-modal__close-button img {
+  width: 16px;
+  height: 16px;
 }
 
 .photo-details-modal__images {
