@@ -83,8 +83,11 @@ img {
 
 .table thead th {
   padding: 12px 8px;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .table tbody tr {
@@ -99,6 +102,8 @@ img {
 .table tbody td {
   padding: 12px 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  font-size: 0.95em;
 }
 
 .table-data {
@@ -221,12 +226,13 @@ img {
   padding: 20px 15px;
   margin-bottom: 15px;
   border-radius: 12px;
-  background: rgba(248, 250, 252, 0.8);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
   transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .cards:hover {
-  background: rgba(241, 245, 249, 0.9);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
   transform: translateY(-2px);
 }
 
@@ -240,12 +246,13 @@ img {
   padding: 20px 15px;
   margin-bottom: 15px;
   border-radius: 12px;
-  background: rgba(248, 250, 252, 0.8);
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
   transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .links:hover {
-  background: rgba(241, 245, 249, 0.9);
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.2) 0%, rgba(245, 87, 108, 0.2) 100%);
   transform: translateY(-2px);
 }
 
@@ -258,8 +265,9 @@ img {
   padding: 20px 15px;
   flex-wrap: wrap;
   border-radius: 12px;
-  background: rgba(248, 250, 252, 0.8);
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
   margin-bottom: 15px;
+  font-weight: 600;
 }
 
 .rounded-div {
@@ -294,11 +302,12 @@ img {
   justify-content: left;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   column-gap: 50px;
-  padding: 20px 0;
+  padding: 20px;
   margin-bottom: 20px;
   border-radius: 12px;
-  background: rgba(248, 250, 252, 0.8);
-  padding: 20px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  font-weight: 600;
+  font-size: 1.1em;
 }
 
 .logo {
@@ -322,7 +331,7 @@ img {
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 12px;
-  background: rgba(248, 250, 252, 0.8);
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
 }
 
 .stats div {
@@ -334,6 +343,8 @@ img {
   transition: all 0.3s ease;
   min-width: 80px;
   text-align: center;
+  font-weight: 600;
+  font-size: 0.95em;
 }
 
 .stats div:hover {
@@ -348,7 +359,7 @@ img {
   justify-content: center;
   padding: 10px;
   border-radius: 12px;
-  background: rgba(248, 250, 252, 0.8);
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
   margin-bottom: 20px;
 }
 
@@ -364,7 +375,7 @@ img {
   justify-content: center;
   padding: 10px;
   border-radius: 12px;
-  background: rgba(248, 250, 252, 0.8);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
 }
 
 /* Footer CSS */
