@@ -180,7 +180,7 @@ img {
   backdrop-filter: blur(15px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   width: 300px;
-  height: 500px;
+  height: 600px;
   flex-shrink: 0;
   align-self: flex-start;
   overflow-y: auto;

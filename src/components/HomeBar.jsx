@@ -23,8 +23,8 @@ export const HomeBar = ({ teams, onTeamChange }) => {
         </select>
       </div>
       <nav className="nav header-nav">
-        <a href="">Home</a>
-        <a href="">Sign in</a>
+        <a href="#">Home</a>
+        <a href="#">Sign in</a>
       </nav>
     </div>
   );
