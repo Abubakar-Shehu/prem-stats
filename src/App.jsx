@@ -108,7 +108,7 @@ function App() {
         </section>
         <section className='mid-bar'>
           <TeamHeader selectedTeam={selectedTeam} teamMatches={teamMatches}/>
-          <KeyStats />
+          <KeyStats selectedTeam={selectedTeam} teamMatches={teamMatches} />
           <FixtureList teamMatches={teamMatches} selectedTeam={selectedTeam}/>  
         </section>
         <section className='right-bar'>

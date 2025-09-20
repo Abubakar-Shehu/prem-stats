@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export const TableStanding = ({table}) => {
 
   const currentTable = table.map(place => {
@@ -12,7 +13,7 @@ export const TableStanding = ({table}) => {
   });
 
   return (
-  <div className="standing-table">
+  <>
     <table className="table">
       <thead>
         <tr>
@@ -23,6 +24,6 @@ export const TableStanding = ({table}) => {
       </thead>
       {currentTable}
     </table>
-  </div>
+  </>
   );
 }

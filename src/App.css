@@ -5,8 +5,38 @@
   column-gap: 50px;
 }
 
+/* Portfolio link styling */
+.portfolio-link,
 a {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+  color: #667eea !important;
+  transition: all 0.3s ease;
+  position: relative;
   text-decoration: none;
+}
+
+.portfolio-link:hover,
+a:hover {
+  color: #764ba2 !important;
+  transform: translateY(-1px);
+}
+
+.portfolio-link::after,
+a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.portfolio-link:hover::after,
+a:hover::after {
+  width: 100%;
 }
 
 img {
@@ -230,7 +260,7 @@ img {
   backdrop-filter: blur(15px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   width: 350px;
-  height: 700px;
+  height: auto;
   flex-shrink: 0;
   align-self: flex-start;
   overflow-y: auto;
@@ -557,28 +587,52 @@ img {
   flex-wrap: wrap;
   gap: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 20px;
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%);
 }
 
-.stats div {
+/* Enhanced stat item styling */
+.stat-item {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  padding: 15px 20px;
+  padding: 5px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  min-width: 80px;
+  min-width: 100px;
   text-align: center;
-  font-weight: 600;
-  font-size: 0.95em;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.stats div:hover {
+.stat-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.stat-value.positive {
+  color: #10b981;
+}
+
+.stat-value.negative {
+  color: #ef4444;
 }
 
 /* Fixture List CSS */
