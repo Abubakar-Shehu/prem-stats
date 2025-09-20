@@ -107,7 +107,7 @@ function App() {
           <RecentResults teamMatches={teamMatches} selectedTeam={selectedTeam} />
         </section>
         <section className='mid-bar'>
-          <TeamHeader selectedTeam={selectedTeam}/>
+          <TeamHeader selectedTeam={selectedTeam} teamMatches={teamMatches}/>
           <KeyStats />
           <FixtureList teamMatches={teamMatches} selectedTeam={selectedTeam}/>  
         </section>

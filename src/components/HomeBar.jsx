@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export const HomeBar = ({ teams, onTeamChange }) => {
   const currentTeams = teams.map(team => (
     <option key={team.id} value={team.id}>

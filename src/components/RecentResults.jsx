@@ -1,54 +1,79 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 export const RecentResults = ({ teamMatches, selectedTeam }) => {
-  // Function to determine match result for the selected team
-  const getMatchResult = (match) => {
-    if (!selectedTeam || !match.score) return null;
+  // Get recent finished matches with full match data
+  const getRecentMatches = () => {
+    if (!teamMatches || !selectedTeam) return [];
     
+    return teamMatches
+      ?.filter(match => match.status === 'FINISHED')
+      ?.slice(-10) // Get last 10 matches
+      || [];
+  };
+
+  const recentMatches = getRecentMatches();
+
+  // Function to get opponent team and score info
+  const getMatchInfo = (match) => {
     const homeTeamId = match.homeTeam.id;
     const awayTeamId = match.awayTeam.id;
     const isHomeTeam = selectedTeam.id === homeTeamId;
-    
-    // Check if match is finished
-    if (match.status !== 'FINISHED') return null;
     
     const homeScore = match.score.fullTime.home;
     const awayScore = match.score.fullTime.away;
     
     if (isHomeTeam) {
-      if (homeScore > awayScore) return 'W';
-      if (homeScore < awayScore) return 'L';
-      return 'D';
+      return {
+        opponent: match.awayTeam,
+        score: `${homeScore}-${awayScore}`,
+        isHome: true
+      };
     } else {
-      if (awayScore > homeScore) return 'W';
-      if (awayScore < homeScore) return 'L';
-      return 'D';
+      return {
+        opponent: match.homeTeam,
+        score: `${awayScore}-${homeScore}`,
+        isHome: false
+      };
     }
-  };
-
-  // Get recent finished matches (last 5-10 matches)
-  const recentMatches = teamMatches
-    ?.filter(match => match.status === 'FINISHED')
-    ?.slice(-10) // Get last 10 matches
-    ?.map(match => getMatchResult(match))
-    ?.filter(result => result !== null) || [];
-
-  // Function to get CSS class based on result
-  const getResultClass = (result) => {
-    const baseClass = "rounded-div";
-    if (result === 'W') return `${baseClass} win`;
-    if (result === 'L') return `${baseClass} loss`;
-    return baseClass; // For draws, use default styling
   };
 
   return (
     <section className="results">
       {recentMatches.length > 0 ? (
-        recentMatches.map((result, index) => (
-          <div key={index} className={getResultClass(result)}>
-            {result}
-          </div>
-        ))
+        recentMatches.map((match, index) => {
+          const matchInfo = getMatchInfo(match);
+          return (
+            <div key={index} className="match-result">
+              <div className="opponent-crest">
+                {matchInfo.opponent.crest ? (
+                  <img 
+                    src={matchInfo.opponent.crest} 
+                    alt={`${matchInfo.opponent.name} crest`}
+                    className="team-crest"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                ) : null}
+                <div 
+                  className="team-crest-fallback"
+                  style={{ display: matchInfo.opponent.crest ? 'none' : 'flex' }}
+                >
+                  {matchInfo.opponent.shortName || matchInfo.opponent.name.charAt(0)}
+                </div>
+              </div>
+              <div className="match-score">
+                {matchInfo.score}
+              </div>
+              <div className="match-venue">
+                {matchInfo.isHome ? 'H' : 'A'}
+              </div>
+            </div>
+          );
+        })
       ) : (
-        <div>No recent results</div>
+        <div className="no-results">No recent results</div>
       )}
     </section>
   );

@@ -1,4 +1,4 @@
-import close from "../styles/close.svg"
+import close from "../styles/close-x.svg"
 
 export const Modal = ({onClose }) => {
   return (

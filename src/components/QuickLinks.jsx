@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export const QuickLinks = ({onLinkClick}) => {
   return (
   <section className="links">
