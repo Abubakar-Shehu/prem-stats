@@ -1,27 +1,66 @@
+/* Modal CSS */
 .photo-details-modal {
   background-color: white;
   box-shadow: 0 0 0 50vmax rgba(0, 0, 0, .5);
-  position: absolute;
-  top: 55%;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -40%);
+  transform: translate(-50%, -50%);
   height: 80%;
   width: 55%;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-radius: 12px;
+  z-index: 1000;
+}
+
+/* Beautify modal surface */
+.photo-details-modal {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.98) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* Mobile responsive modal */
+@media (max-width: 768px) {
+  .photo-details-modal {
+    width: 92%;
+    height: 72%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .photo-details-modal__close-button {
-  background-color: white;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  margin-left: 16px;
-  margin-top: 16px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1001;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.photo-details-modal__close-button:hover {
+  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border-color: #d1d5db;
+}
+
+.photo-details-modal__close-button img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(20%) sepia(8%) saturate(2000%) hue-rotate(200deg) brightness(90%) contrast(90%);
 }
 
 .photo-details-modal__images {

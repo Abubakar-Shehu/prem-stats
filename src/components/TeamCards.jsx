@@ -1,3 +1,5 @@
+import '../styles/TeamCards.css';
+
 export const TeamCards = ({selectedTeam}) => {
   return (
   <section className="cards">

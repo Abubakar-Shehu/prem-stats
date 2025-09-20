@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import '../styles/TableStanding.css';
+
 export const TableStanding = ({table}) => {
 
   const currentTable = table.map(place => {

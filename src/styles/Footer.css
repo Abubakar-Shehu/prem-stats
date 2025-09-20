@@ -1,0 +1,42 @@
+/* Footer CSS */
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Tablet responsive footer */
+@media (max-width: 1024px) {
+  .footer-nav {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+
+/* Mobile responsive footer */
+@media (max-width: 768px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 20px;
+    margin: 15px;
+    padding: 15px;
+  }
+}
+
+/* Small mobile responsive footer */
+@media (max-width: 480px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 15px;
+    margin: 10px;
+    padding: 10px;
+  }
+}

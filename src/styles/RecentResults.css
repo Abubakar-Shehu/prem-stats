@@ -1,0 +1,142 @@
+/* Recent Result CSS */
+
+.results {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 20px 15px;
+  flex-wrap: wrap;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+  margin-bottom: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Match result styling */
+.match-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-width: 60px;
+}
+
+.match-result:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.opponent-crest {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-crest {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.team-crest-fallback {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.match-score {
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  text-align: center;
+}
+
+.match-venue {
+  font-size: 10px;
+  font-weight: 600;
+  color: #6b7280;
+  background: rgba(107, 114, 128, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.no-results {
+  color: #9ca3af;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  width: 100%;
+}
+
+.rounded-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  flex-shrink: 0;
+}
+
+.rounded-div.win {
+  background-color: #4ade80;
+  /* Green background for wins */
+  color: white;
+  font-weight: 600;
+}
+
+.rounded-div.loss {
+  background-color: #ef4444;
+  /* Red background for losses */
+  color: white;
+  font-weight: 600;
+}
+
+/* Mobile responsive recent results */
+@media (max-width: 768px) {
+  .results {
+    gap: 6px;
+    padding: 15px;
+  }
+
+  .match-result {
+    min-width: 50px;
+    padding: 6px;
+  }
+
+  .team-crest {
+    width: 28px;
+    height: 28px;
+  }
+
+  .team-crest-fallback {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .match-score {
+    font-size: 11px;
+  }
+
+  .match-venue {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+}

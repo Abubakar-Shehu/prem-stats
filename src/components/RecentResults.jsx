@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import '../styles/RecentResults.css';
+
 export const RecentResults = ({ teamMatches, selectedTeam }) => {
   // Get recent finished matches with full match data
   const getRecentMatches = () => {

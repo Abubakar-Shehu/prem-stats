@@ -1,3 +1,5 @@
+import '../styles/FixtureList.css';
+
 export const FixtureList = ({ teamMatches, selectedTeam }) => {
   // Filter and process matches
   const getUpcomingMatches = () => {

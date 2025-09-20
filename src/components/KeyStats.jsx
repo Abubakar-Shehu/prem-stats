@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import '../styles/KeyStats.css';
+
 export const KeyStats = ({ selectedTeam, teamMatches }) => {
   // Calculate team statistics
   const calculateStats = () => {

@@ -1,0 +1,15 @@
+/* Fixture List CSS */
+
+.fixture-table {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+  margin-bottom: 20px;
+}
+
+.fixture-logo {
+  height: 70px;
+  width: 70px;
+}

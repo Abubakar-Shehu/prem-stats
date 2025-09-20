@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import '../styles/TeamHeader.css';
+
 export const TeamHeader = ({selectedTeam, teamMatches}) => {
   // Function to get last 4 games record
   const getLastFourGamesRecord = () => {
