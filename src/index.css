@@ -4,20 +4,29 @@
   padding: 0;
 }
 
-body,
 html {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  background-image: url('/footballbg.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   color: #ffffff;
   line-height: 1.6;
   scroll-behavior: smooth;
   min-height: 100vh;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: 100%;
 }
 
 /* Add a subtle pattern overlay */
@@ -34,4 +43,48 @@ body::before {
     radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
+}
+
+/* Dark Theme (Default) */
+.dark-theme,
+.dark-theme body,
+.dark-theme html,
+.dark-theme #root {
+  background-image: url('/footballbg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.dark-theme body::before {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+}
+
+/* Light Theme */
+.light-theme,
+.light-theme body,
+.light-theme html,
+.light-theme #root {
+  background-image: url('/lightfootybg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  color: #2d3748 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.light-theme body::before {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
 }

@@ -232,3 +232,45 @@ img {
   overflow-y: auto;
   padding: 10px;
 }
+
+/* Dark Theme Styles */
+.dark-theme {
+  background-image: url('/footballbg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  color: #ffffff !important;
+}
+
+/* Light Theme Styles */
+.light-theme {
+  background-image: url('/lightfootybg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  color: #2d3748 !important;
+}
+
+.light-theme .left-bar,
+.light-theme .mid-bar,
+.light-theme .right-bar {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #2d3748;
+}
+
+.light-theme .table {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #2d3748;
+}
+
+.light-theme .table tbody tr:hover {
+  background-color: rgba(102, 126, 234, 0.1);
+}
+
+.light-theme .table tbody td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}

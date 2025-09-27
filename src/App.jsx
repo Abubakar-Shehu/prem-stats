@@ -20,9 +20,11 @@ function App() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [table, setTable] = useState([]);
   const [teamMatches, setTeamMatches] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
 
   useEffect(() => {
@@ -98,8 +100,8 @@ function App() {
   console.log(import.meta.env)
 
   return (
-    <>
-      <HomeBar teams={teams} onTeamChange={handleTeamChange}/>
+    <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
+      <HomeBar teams={teams} onTeamChange={handleTeamChange} isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
       <div className='main-body'>
         <section className='left-bar'>
           <TeamCards selectedTeam={selectedTeam}/>
@@ -119,7 +121,7 @@ function App() {
       {isModalOpen && (
         <Modal onClose={closeModal} />
       )}
-    </>
+    </div>
   )
 }
 

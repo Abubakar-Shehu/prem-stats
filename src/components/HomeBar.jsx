@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../styles/HomeBar.css';
 
-export const HomeBar = ({ teams, onTeamChange }) => {
+export const HomeBar = ({ teams, onTeamChange, isDarkMode, toggleTheme }) => {
   const currentTeams = teams.map(team => (
     <option key={team.id} value={team.id}>
       {team.name}
@@ -26,6 +26,9 @@ export const HomeBar = ({ teams, onTeamChange }) => {
         </select>
       </div>
       <nav className="nav header-nav">
+        <button className="theme-toggle-btn" onClick={toggleTheme} title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
         <a href="#">Home</a>
         <a href="#">Sign in</a>
       </nav>

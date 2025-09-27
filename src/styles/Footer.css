@@ -42,3 +42,11 @@
     padding: 10px;
   }
 }
+
+/* Light Theme Styles */
+.light-theme .footer-nav {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #2d3748;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
