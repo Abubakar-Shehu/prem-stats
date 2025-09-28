@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import close from '../styles/close-square-svgrepo-com.svg'
-import "../styles/Modal.css"
+import "../styles/modal.css"
 
 export const Modal = ({onClose }) => {
   return (
