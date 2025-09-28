@@ -110,3 +110,29 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   color: #2d3748;
 }
+
+/* Navigation links styling */
+.nav a {
+  color: #ffffff !important;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1);
+  transform: none;
+}
+
+/* Light theme navigation links */
+.light-theme .nav a {
+  color: #2d3748 !important;
+}
+
+.light-theme .nav a:hover {
+  color: #2d3748 !important;
+  background: rgba(0, 0, 0, 0.1);
+}

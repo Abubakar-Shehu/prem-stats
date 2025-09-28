@@ -60,6 +60,16 @@ body::before {
   padding: 0 !important;
 }
 
+/* Apply dark theme to body when dark-theme class is on root */
+.dark-theme {
+  background-image: url('/footballbg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  min-height: 100vh;
+}
+
 .dark-theme body::before {
   background-image:
     radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
@@ -80,6 +90,16 @@ body::before {
   color: #2d3748 !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+/* Apply light theme to body when light-theme class is on root */
+.light-theme {
+  background-image: url('/lightfootybg.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  min-height: 100vh;
 }
 
 .light-theme body::before {
