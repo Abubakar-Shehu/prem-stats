@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { authApi } from '../lib/authApi'
@@ -82,7 +83,7 @@ export const SignIn = () => {
 
         <div className="signin-footer">
           <p>
-            Don't have an account?
+            Don&rsquo;t have an account?
             <Link to="/signup" className="toggle-btn">
               Sign Up
             </Link>
