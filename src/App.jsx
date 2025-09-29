@@ -25,20 +25,28 @@ function App() {
   const [table, setTable] = useState([]);
   const [teamMatches, setTeamMatches] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
-
-  useEffect(() => {
+  // Helper function to get API URL
+  const getApiUrl = () => {
     const apiUrl = import.meta.env.VITE_URL;
-    console.log('API URL:', apiUrl);
-    
     if (!apiUrl || apiUrl === 'your_existing_api_url_here') {
       console.error('VITE_URL is not properly configured in .env file');
-      return;
+      setError('API URL not configured. Please check your environment variables.');
+      return null;
     }
+    return apiUrl;
+  };
+
+
+  useEffect(() => {
+    const apiUrl = getApiUrl();
+    if (!apiUrl) return;
 
     const url = `${apiUrl}/api/prem`;
     const options = { 
@@ -46,6 +54,8 @@ function App() {
     };
 
     const getStats = async () => {
+      setLoading(true);
+      setError(null);
       try {
         console.log('Fetching from:', url);
         const response = await fetch(url, options);
@@ -61,10 +71,13 @@ function App() {
           setTeams(result.teams);
         } else {
           console.warn('No teams data found in response:', result);
+          setError('No teams data available');
         }
       } catch (error) {
         console.error('Error fetching data:', error);
-        console.error('Please check your API URL and ensure the server is running');
+        setError('Failed to fetch teams data. Please check your API URL and ensure the server is running.');
+      } finally {
+        setLoading(false);
       }
     } 
 
@@ -72,12 +85,8 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_URL;
-    
-    if (!apiUrl || apiUrl === 'your_existing_api_url_here') {
-      console.error('VITE_URL is not properly configured for table data');
-      return;
-    }
+    const apiUrl = getApiUrl();
+    if (!apiUrl) return;
 
     const url = `${apiUrl}/api/prem/table`;
     const options = { 
@@ -103,6 +112,7 @@ function App() {
         }
       } catch (error) {
         console.error('Error fetching table data:', error);
+        setError('Failed to fetch table data');
       }
     } 
 
@@ -112,12 +122,8 @@ function App() {
   useEffect(() => {
     if (!selectedTeam?.id) return;
 
-    const apiUrl = import.meta.env.VITE_URL;
-    
-    if (!apiUrl || apiUrl === 'your_existing_api_url_here') {
-      console.error('VITE_URL is not properly configured for team matches');
-      return;
-    }
+    const apiUrl = getApiUrl();
+    if (!apiUrl) return;
 
     const team = selectedTeam.id
     const url = `${apiUrl}/api/prem/matches/${team}`;
@@ -144,6 +150,7 @@ function App() {
         }
       } catch (error) {
         console.error('Error fetching matches data:', error);
+        setError('Failed to fetch matches data');
       }
     } 
 
@@ -168,6 +175,17 @@ function App() {
             <Route path="/" element={
               <>
                 <HomeBar teams={teams} onTeamChange={handleTeamChange} isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
+                {error && (
+                  <div className="error-banner">
+                    <p>⚠️ {error}</p>
+                    <button onClick={() => setError(null)}>✕</button>
+                  </div>
+                )}
+                {loading && (
+                  <div className="loading-banner">
+                    <p>🔄 Loading data...</p>
+                  </div>
+                )}
                 <div className='main-body'>
                   <section className='left-bar'>
                     <TeamCards selectedTeam={selectedTeam}/>

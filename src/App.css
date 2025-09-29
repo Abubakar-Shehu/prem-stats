@@ -5,6 +5,55 @@
   column-gap: 50px;
 }
 
+/* Error and Loading Banners */
+.error-banner {
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  padding: 12px 20px;
+  margin: 10px 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.error-banner button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.error-banner button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.loading-banner {
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  padding: 12px 20px;
+  margin: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Light theme banners */
+.light-theme .error-banner {
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+}
+
+.light-theme .loading-banner {
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+}
+
 /* Portfolio link styling */
 .portfolio-link,
 a {

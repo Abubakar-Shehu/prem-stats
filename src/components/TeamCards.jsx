@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import '../styles/TeamCards.css';
 
 export const TeamCards = ({selectedTeam}) => {
@@ -8,7 +9,7 @@ export const TeamCards = ({selectedTeam}) => {
         <>
           <img src={selectedTeam.crest} alt="Crest of the team"/>
           <h2>{selectedTeam.shortName}</h2>
-          <p>{selectedTeam.coach.name}</p>
+          <p>{selectedTeam.coach?.name || 'Coach information not available'}</p>
         </>
       )  : (
           <h2>No team selected</h2>

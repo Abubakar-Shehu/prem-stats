@@ -1,5 +1,5 @@
 // API service for authentication via backend server
-const API_BASE_URL = import.meta.env.VITE_URL || 'https://backend-nkn2pg.fly.dev';
+const API_BASE_URL = import.meta.env.VITE_URL || 'https://server-abu.vercel.app';
 
 export const authApi = {
   // Sign up user
@@ -18,7 +18,14 @@ export const authApi = {
     } catch (error) {
       console.error('Failed to parse JSON response:', error);
       console.error('Response status:', response.status);
-      console.error('Response text:', await response.text());
+      // Clone the response to read the text without consuming the original stream
+      const responseClone = response.clone();
+      try {
+        const responseText = await responseClone.text();
+        console.error('Response text:', responseText);
+      } catch (textError) {
+        console.error('Could not read response text:', textError);
+      }
       throw new Error('Server returned invalid response. Please check if the server is running.');
     }
 
@@ -45,7 +52,14 @@ export const authApi = {
     } catch (error) {
       console.error('Failed to parse JSON response:', error);
       console.error('Response status:', response.status);
-      console.error('Response text:', await response.text());
+      // Clone the response to read the text without consuming the original stream
+      const responseClone = response.clone();
+      try {
+        const responseText = await responseClone.text();
+        console.error('Response text:', responseText);
+      } catch (textError) {
+        console.error('Could not read response text:', textError);
+      }
       throw new Error('Server returned invalid response. Please check if the server is running.');
     }
 
