@@ -13,6 +13,7 @@ import { Modal } from './routes/modal';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
 import './App.css'
 import { useEffect, useState } from 'react'
 
@@ -158,38 +159,40 @@ function App() {
   console.log(import.meta.env)
 
   return (
-    <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
-      <Router>
-        <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/" element={
-            <>
-              <HomeBar teams={teams} onTeamChange={handleTeamChange} isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
-              <div className='main-body'>
-                <section className='left-bar'>
-                  <TeamCards selectedTeam={selectedTeam}/>
-                  <QuickLinks onLinkClick={openModal}/>
-                  <RecentResults teamMatches={teamMatches} selectedTeam={selectedTeam} />
-                </section>
-                <section className='mid-bar'>
-                  <TeamHeader selectedTeam={selectedTeam} teamMatches={teamMatches}/>
-                  <KeyStats selectedTeam={selectedTeam} teamMatches={teamMatches} />
-                  <FixtureList teamMatches={teamMatches} selectedTeam={selectedTeam}/>  
-                </section>
-                <section className='right-bar'>
-                  <TableStanding table={table}/>
-                </section>
-              </div>
-              <Footer />
-              {isModalOpen && (
-                <Modal onClose={closeModal} />
-              )}
-            </>
-          } />
-        </Routes>
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
+        <Router>
+          <Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/" element={
+              <>
+                <HomeBar teams={teams} onTeamChange={handleTeamChange} isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
+                <div className='main-body'>
+                  <section className='left-bar'>
+                    <TeamCards selectedTeam={selectedTeam}/>
+                    <QuickLinks onLinkClick={openModal}/>
+                    <RecentResults teamMatches={teamMatches} selectedTeam={selectedTeam} />
+                  </section>
+                  <section className='mid-bar'>
+                    <TeamHeader selectedTeam={selectedTeam} teamMatches={teamMatches}/>
+                    <KeyStats selectedTeam={selectedTeam} teamMatches={teamMatches} />
+                    <FixtureList teamMatches={teamMatches} selectedTeam={selectedTeam}/>  
+                  </section>
+                  <section className='right-bar'>
+                    <TableStanding table={table}/>
+                  </section>
+                </div>
+                <Footer />
+                {isModalOpen && (
+                  <Modal onClose={closeModal} />
+                )}
+              </>
+            } />
+          </Routes>
+        </Router>
+      </div>
+    </AuthProvider>
   )
 }
 

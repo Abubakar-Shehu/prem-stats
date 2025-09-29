@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { authApi } from '../lib/authApi'
+import { useAuth } from '../contexts/AuthContext'
 import '../styles/SignIn.css'
 
 export const SignUp = () => {
   const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -12,6 +13,7 @@ export const SignUp = () => {
   const [infoMessage, setInfoMessage] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
+  const { signUp } = useAuth()
 
   // Pre-fill email if coming from sign-in page
   useEffect(() => {
@@ -42,8 +44,15 @@ export const SignUp = () => {
       return
     }
 
+    // Validate username
+    if (!username || username.trim().length < 3) {
+      setError('Username must be at least 3 characters long')
+      setLoading(false)
+      return
+    }
+
     try {
-      const data = await authApi.signUp(email, password)
+      await signUp(email, password, username)
       
       // Show success message and redirect
       alert('Account created successfully! Please check your email for verification.')
@@ -79,6 +88,19 @@ export const SignUp = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="Enter your email"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              placeholder="Choose a username"
+              minLength={3}
             />
           </div>
 

@@ -3,13 +3,13 @@ const API_BASE_URL = import.meta.env.VITE_URL || 'https://backend-nkn2pg.fly.dev
 
 export const authApi = {
   // Sign up user
-  async signUp(email, password) {
+  async signUp(email, password, username) {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, username }),
     });
 
     const data = await response.json();

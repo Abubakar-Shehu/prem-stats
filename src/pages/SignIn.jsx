@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { authApi } from '../lib/authApi'
+import { useAuth } from '../contexts/AuthContext'
 import '../styles/SignIn.css'
 
 export const SignIn = () => {
@@ -10,6 +10,7 @@ export const SignIn = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const { signIn } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -17,7 +18,7 @@ export const SignIn = () => {
     setError('')
 
     try {
-      const data = await authApi.signIn(email, password)
+      await signIn(email, password)
       
       // Successful sign in - redirect to home
       navigate('/')
