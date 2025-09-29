@@ -12,7 +12,15 @@ export const authApi = {
       body: JSON.stringify({ email, password, username }),
     });
 
-    const data = await response.json();
+    let data;
+    try {
+      data = await response.json();
+    } catch (error) {
+      console.error('Failed to parse JSON response:', error);
+      console.error('Response status:', response.status);
+      console.error('Response text:', await response.text());
+      throw new Error('Server returned invalid response. Please check if the server is running.');
+    }
 
     if (!response.ok) {
       throw new Error(data.error || 'Sign up failed');
@@ -31,7 +39,15 @@ export const authApi = {
       body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
+    let data;
+    try {
+      data = await response.json();
+    } catch (error) {
+      console.error('Failed to parse JSON response:', error);
+      console.error('Response status:', response.status);
+      console.error('Response text:', await response.text());
+      throw new Error('Server returned invalid response. Please check if the server is running.');
+    }
 
     if (!response.ok) {
       throw new Error(data.error || 'Sign in failed');
