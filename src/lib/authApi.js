@@ -1,5 +1,5 @@
 // API service for authentication via backend server
-const API_BASE_URL = import.meta.env.VITE_URL || 'https://server-abu.vercel.app';
+const API_BASE_URL = import.meta.env.VITE_URL || 'https://backend-nkn2pg.fly.dev';
 
 export const authApi = {
   // Sign up user
