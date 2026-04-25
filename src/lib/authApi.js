@@ -7,6 +7,7 @@ export const authApi = {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include', // Include cookies
       body: JSON.stringify({ email, password, username })
     });
 
@@ -42,6 +43,7 @@ export const authApi = {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include', // Include cookies
       body: JSON.stringify({ email, password }),
     });
 
@@ -76,6 +78,7 @@ export const authApi = {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include', // Include cookies
     });
 
     const data = await response.json();
@@ -94,6 +97,7 @@ export const authApi = {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include', // Include cookies
     });
 
     const data = await response.json();

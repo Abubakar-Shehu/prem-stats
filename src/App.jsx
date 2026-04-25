@@ -50,7 +50,8 @@ function App() {
 
     const url = `${apiUrl}/api/prem`;
     const options = { 
-      method: 'GET'
+      method: 'GET',
+      credentials: 'include' // Include cookies for authentication
     };
 
     const getStats = async () => {
@@ -61,6 +62,11 @@ function App() {
         const response = await fetch(url, options);
         
         if (!response.ok) {
+          if (response.status === 401) {
+            // Authentication required - redirect to sign in
+            window.location.href = '/signin';
+            return;
+          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
@@ -90,7 +96,8 @@ function App() {
 
     const url = `${apiUrl}/api/prem/table`;
     const options = { 
-      method: 'GET'
+      method: 'GET',
+      credentials: 'include' // Include cookies for authentication
     };
 
     const getTableStanding = async () => {
@@ -99,6 +106,11 @@ function App() {
         const response = await fetch(url, options);
         
         if (!response.ok) {
+          if (response.status === 401) {
+            // Authentication required - redirect to sign in
+            window.location.href = '/signin';
+            return;
+          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
@@ -128,7 +140,8 @@ function App() {
     const team = selectedTeam.id
     const url = `${apiUrl}/api/prem/matches/${team}`;
     const options = { 
-      method: 'GET'
+      method: 'GET',
+      credentials: 'include' // Include cookies for authentication
     };
 
     const getGames = async () => {
@@ -137,6 +150,11 @@ function App() {
         const response = await fetch(url, options);
         
         if (!response.ok) {
+          if (response.status === 401) {
+            // Authentication required - redirect to sign in
+            window.location.href = '/signin';
+            return;
+          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
