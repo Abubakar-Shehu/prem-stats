@@ -47,14 +47,15 @@ export const authApi = {
       body: JSON.stringify({ email, password }),
     });
 
+    // Clone BEFORE consuming the body!
+    const responseClone = response.clone();
+
     let data;
     try {
       data = await response.json();
     } catch (error) {
       console.error('Failed to parse JSON response:', error);
       console.error('Response status:', response.status);
-      // Clone the response to read the text without consuming the original stream
-      const responseClone = response.clone();
       try {
         const responseText = await responseClone.text();
         console.error('Response text:', responseText);

@@ -17,6 +17,13 @@ import { AuthProvider } from './contexts/AuthContext';
 import './App.css'
 import { useEffect, useState } from 'react'
 
+const isAuthRoute = () => window.location.pathname === '/signin' || window.location.pathname === '/signup';
+const redirectToSignIn = () => {
+  if (!isAuthRoute()) {
+    window.location.href = '/signin';
+  }
+};
+
 function App() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,6 +52,8 @@ function App() {
 
 
   useEffect(() => {
+    if (isAuthRoute()) return;
+
     const apiUrl = getApiUrl();
     if (!apiUrl) return;
 
@@ -63,8 +72,8 @@ function App() {
         
         if (!response.ok) {
           if (response.status === 401) {
-            // Authentication required - redirect to sign in
-            window.location.href = '/signin';
+            // Authentication required - redirect unless already on auth pages
+            redirectToSignIn();
             return;
           }
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -91,6 +100,8 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (isAuthRoute()) return;
+
     const apiUrl = getApiUrl();
     if (!apiUrl) return;
 
@@ -107,8 +118,8 @@ function App() {
         
         if (!response.ok) {
           if (response.status === 401) {
-            // Authentication required - redirect to sign in
-            window.location.href = '/signin';
+            // Authentication required - redirect unless already on auth pages
+            redirectToSignIn();
             return;
           }
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -132,6 +143,7 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (isAuthRoute()) return;
     if (!selectedTeam?.id) return;
 
     const apiUrl = getApiUrl();
@@ -151,8 +163,8 @@ function App() {
         
         if (!response.ok) {
           if (response.status === 401) {
-            // Authentication required - redirect to sign in
-            window.location.href = '/signin';
+            // Authentication required - redirect unless already on auth pages
+            redirectToSignIn();
             return;
           }
           throw new Error(`HTTP error! status: ${response.status}`);

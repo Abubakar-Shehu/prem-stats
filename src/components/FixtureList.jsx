@@ -1,4 +1,5 @@
 import '../styles/FixtureList.css';
+import PropTypes from 'prop-types';
 
 export const FixtureList = ({ teamMatches, selectedTeam }) => {
   // Filter and process matches
@@ -89,3 +90,32 @@ export const FixtureList = ({ teamMatches, selectedTeam }) => {
     </div>
   );
 }
+
+FixtureList.propTypes = {
+  teamMatches: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      status: PropTypes.string.isRequired,
+      utcDate: PropTypes.string.isRequired,
+      awayTeam: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        shortName: PropTypes.string
+      }).isRequired,
+      homeTeam: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        shortName: PropTypes.string
+      }).isRequired,
+      competition: PropTypes.shape({
+        emblem: PropTypes.string
+      }).isRequired
+    })
+  ),
+  selectedTeam: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+  })
+};
+
+FixtureList.defaultProps = {
+  teamMatches: [],
+  selectedTeam: null
+};
