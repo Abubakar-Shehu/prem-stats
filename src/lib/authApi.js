@@ -1,5 +1,5 @@
-// API service for authentication via backend server
-const API_BASE_URL = import.meta.env.VITE_URL || 'https://backend-nkn2pg.fly.dev';
+// Empty VITE_URL uses same-origin proxy (Vite/Vercel) to avoid CORS with credentials.
+const API_BASE_URL = import.meta.env.VITE_URL ?? '';
 
 export const authApi = {
   // Sign up user
