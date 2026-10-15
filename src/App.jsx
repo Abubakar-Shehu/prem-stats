@@ -5,6 +5,7 @@ import {
   KeyStats, 
   QuickLinks, 
   RecentResults,
+  SeasonTabs,
   TableStanding,
   TeamCards,
   TeamHeader
@@ -24,6 +25,12 @@ const redirectToSignIn = () => {
   }
 };
 
+const defaultSeason = () => {
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  return now.getUTCMonth() >= 6 ? year : year - 1;
+};
+
 function App() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,6 +38,8 @@ function App() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [table, setTable] = useState([]);
   const [teamMatches, setTeamMatches] = useState([]);
+  const [seasons, setSeasons] = useState([]);
+  const [selectedSeason, setSelectedSeason] = useState(defaultSeason);
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -39,25 +48,61 @@ function App() {
   const closeModal = () => setIsModalOpen(false);
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
-  // Helper function to get API URL
+  // Empty/undefined VITE_URL means same-origin (Vite middleware / Vercel functions).
   const getApiUrl = () => {
     const apiUrl = import.meta.env.VITE_URL;
-    if (!apiUrl || apiUrl === 'your_existing_api_url_here') {
+    if (apiUrl === 'your_existing_api_url_here' || apiUrl === 'your_backend_api_url_here') {
       console.error('VITE_URL is not properly configured in .env file');
       setError('API URL not configured. Please check your environment variables.');
       return null;
     }
-    return apiUrl;
+    return apiUrl ?? '';
   };
-
 
   useEffect(() => {
     if (isAuthRoute()) return;
 
     const apiUrl = getApiUrl();
-    if (!apiUrl) return;
+    if (apiUrl === null) return;
 
-    const url = `${apiUrl}/api/prem`;
+    const loadSeasons = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/prem/seasons`, {
+          method: 'GET',
+          credentials: 'include',
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        if (Array.isArray(result.seasons) && result.seasons.length) {
+          setSeasons(result.seasons);
+          if (result.currentSeason) {
+            setSelectedSeason((current) => current || result.currentSeason);
+          }
+        }
+      } catch (seasonError) {
+        console.warn('Could not load seasons list:', seasonError);
+        // Keep local defaults so the tabs still render.
+        setSeasons([
+          { season: 2026, label: '2026/27', isCurrent: true },
+          { season: 2025, label: '2025/26', isCurrent: false },
+          { season: 2024, label: '2024/25', isCurrent: false },
+          { season: 2023, label: '2023/24', isCurrent: false },
+        ]);
+      }
+    };
+
+    loadSeasons();
+  }, []);
+
+  useEffect(() => {
+    if (isAuthRoute()) return;
+
+    const apiUrl = getApiUrl();
+    if (apiUrl === null) return;
+
+    const url = `${apiUrl}/api/prem?season=${selectedSeason}`;
     const options = { 
       method: 'GET',
       credentials: 'include' // Include cookies for authentication
@@ -66,6 +111,8 @@ function App() {
     const getStats = async () => {
       setLoading(true);
       setError(null);
+      setSelectedTeam(null);
+      setTeamMatches([]);
       try {
         console.log('Fetching from:', url);
         const response = await fetch(url, options);
@@ -88,8 +135,8 @@ function App() {
           console.warn('No teams data found in response:', result);
           setError('No teams data available');
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } catch (fetchError) {
+        console.error('Error fetching data:', fetchError);
         setError('Failed to fetch teams data. Please check your API URL and ensure the server is running.');
       } finally {
         setLoading(false);
@@ -97,15 +144,15 @@ function App() {
     } 
 
     getStats();
-  }, [])
+  }, [selectedSeason])
 
   useEffect(() => {
     if (isAuthRoute()) return;
 
     const apiUrl = getApiUrl();
-    if (!apiUrl) return;
+    if (apiUrl === null) return;
 
-    const url = `${apiUrl}/api/prem/table`;
+    const url = `${apiUrl}/api/prem/table?season=${selectedSeason}`;
     const options = { 
       method: 'GET',
       credentials: 'include' // Include cookies for authentication
@@ -132,25 +179,26 @@ function App() {
           setTable(result.standings[0].table);
         } else {
           console.warn('No table data found in response:', result);
+          setTable([]);
         }
-      } catch (error) {
-        console.error('Error fetching table data:', error);
+      } catch (fetchError) {
+        console.error('Error fetching table data:', fetchError);
         setError('Failed to fetch table data');
       }
     } 
 
     getTableStanding();
-  }, [])
+  }, [selectedSeason])
 
   useEffect(() => {
     if (isAuthRoute()) return;
     if (!selectedTeam?.id) return;
 
     const apiUrl = getApiUrl();
-    if (!apiUrl) return;
+    if (apiUrl === null) return;
 
     const team = selectedTeam.id
-    const url = `${apiUrl}/api/prem/matches/${team}`;
+    const url = `${apiUrl}/api/prem/matches/${team}?season=${selectedSeason}`;
     const options = { 
       method: 'GET',
       credentials: 'include' // Include cookies for authentication
@@ -177,24 +225,27 @@ function App() {
           setTeamMatches(result.matches);
         } else {
           console.warn('No matches data found in response:', result);
+          setTeamMatches([]);
         }
-      } catch (error) {
-        console.error('Error fetching matches data:', error);
+      } catch (fetchError) {
+        console.error('Error fetching matches data:', fetchError);
         setError('Failed to fetch matches data');
       }
     } 
 
     getGames();
-  }, [selectedTeam])
+  }, [selectedTeam, selectedSeason])
 
   const handleTeamChange = (event) => {
     const selectedTeamId = event.target.value;
     const team = teams.find(t => String(t.id) === selectedTeamId);  // Find the team by ID
     setSelectedTeam(team);  // Update the selected team state
   };
-  
-  console.log(import.meta.env)
 
+  const handleSeasonChange = (seasonYear) => {
+    setSelectedSeason(seasonYear);
+  };
+  
   return (
     <AuthProvider>
       <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
@@ -204,7 +255,13 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/" element={
               <>
-                <HomeBar teams={teams} onTeamChange={handleTeamChange} isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
+                <HomeBar key={selectedSeason} teams={teams} onTeamChange={handleTeamChange} isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
+                <SeasonTabs
+                  seasons={seasons}
+                  selectedSeason={selectedSeason}
+                  onSeasonChange={handleSeasonChange}
+                  disabled={loading}
+                />
                 {error && (
                   <div className="error-banner">
                     <p>⚠️ {error}</p>
@@ -213,7 +270,7 @@ function App() {
                 )}
                 {loading && (
                   <div className="loading-banner">
-                    <p>🔄 Loading data...</p>
+                    <p>🔄 Loading {selectedSeason}/{String(selectedSeason + 1).slice(-2)} data...</p>
                   </div>
                 )}
                 <div className='main-body'>
