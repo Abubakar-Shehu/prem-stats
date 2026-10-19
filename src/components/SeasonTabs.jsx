@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import '../styles/SeasonTabs.css';
 
-export const SeasonTabs = ({ seasons, selectedSeason, onSeasonChange, disabled = false }) => {
+export const SeasonTabs = ({ seasons, selectedSeason, onSeasonChange }) => {
   if (!seasons?.length) return null;
 
   return (
     <div className="season-tabs" role="tablist" aria-label="Premier League seasons">
+      <span className="season-tabs-title">Season</span>
       {seasons.map((season) => {
         const isActive = season.season === selectedSeason;
         return (
@@ -15,7 +16,6 @@ export const SeasonTabs = ({ seasons, selectedSeason, onSeasonChange, disabled =
             role="tab"
             aria-selected={isActive}
             className={`season-tab${isActive ? ' is-active' : ''}`}
-            disabled={disabled || isActive}
             onClick={() => onSeasonChange(season.season)}
           >
             <span className="season-tab-label">{season.label}</span>
