@@ -9,7 +9,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
+  settings: { react: { version: '19.0' } },
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': [
@@ -17,4 +17,10 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  overrides: [
+    {
+      files: ['vite.config.js', 'server/**/*.{js,cjs,mjs}', 'api/**/*.{js,cjs,mjs}'],
+      env: { node: true },
+    },
+  ],
 }
