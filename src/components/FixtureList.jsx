@@ -1,7 +1,7 @@
 import '../styles/FixtureList.css';
 import PropTypes from 'prop-types';
 
-export const FixtureList = ({ teamMatches, selectedTeam }) => {
+export const FixtureList = ({ teamMatches = [], selectedTeam = null }) => {
   // Filter and process matches
   const getUpcomingMatches = () => {
     if (!teamMatches || !selectedTeam) return [];
@@ -113,9 +113,4 @@ FixtureList.propTypes = {
   selectedTeam: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
   })
-};
-
-FixtureList.defaultProps = {
-  teamMatches: [],
-  selectedTeam: null
 };
