@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/HomeBar.css';
 
-export const HomeBar = ({ teams, onTeamChange, isDarkMode, toggleTheme }) => {
+export const HomeBar = ({ teams, onTeamChange, isDarkMode, toggleTheme, seasonLabel }) => {
   const { user, signOut } = useAuth();
   
   const currentTeams = teams.map(team => (
@@ -36,6 +36,9 @@ export const HomeBar = ({ teams, onTeamChange, isDarkMode, toggleTheme }) => {
           </option>
           {currentTeams}
         </select>
+        {seasonLabel ? (
+          <p className="season-pill" aria-live="polite">{seasonLabel}</p>
+        ) : null}
       </div>
       <nav className="nav header-nav">
         <button className="theme-toggle-btn" onClick={toggleTheme} title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>

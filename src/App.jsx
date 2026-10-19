@@ -1,28 +1,9 @@
-import { 
-  FixtureList, 
-  Footer, 
-  HomeBar, 
-  KeyStats, 
-  QuickLinks, 
-  RecentResults,
-  TableStanding,
-  TeamCards,
-  TeamHeader
-} from './components'
-import { Modal } from './routes/modal';
-import { SignIn } from './pages/SignIn';
-import { SignUp } from './pages/SignUp';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import './App.css'
-import { useEffect, useState } from 'react'
-
-const isAuthRoute = () => window.location.pathname === '/signin' || window.location.pathname === '/signup';
-const redirectToSignIn = () => {
-  if (!isAuthRoute()) {
-    window.location.href = '/signin';
-  }
-};
+import { HomePage } from './pages/HomePage';
+import { SignIn } from './pages/SignIn';
+import { SignUp } from './pages/SignUp';
+import './App.css';
 
 function App() {
 
@@ -197,51 +178,15 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
-        <Router>
-          <Routes>
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/" element={
-              <>
-                <HomeBar teams={teams} onTeamChange={handleTeamChange} isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
-                {error && (
-                  <div className="error-banner">
-                    <p>⚠️ {error}</p>
-                    <button onClick={() => setError(null)}>✕</button>
-                  </div>
-                )}
-                {loading && (
-                  <div className="loading-banner">
-                    <p>🔄 Loading data...</p>
-                  </div>
-                )}
-                <div className='main-body'>
-                  <section className='left-bar'>
-                    <TeamCards selectedTeam={selectedTeam}/>
-                    <QuickLinks onLinkClick={openModal}/>
-                    <RecentResults teamMatches={teamMatches} selectedTeam={selectedTeam} />
-                  </section>
-                  <section className='mid-bar'>
-                    <TeamHeader selectedTeam={selectedTeam} teamMatches={teamMatches}/>
-                    <KeyStats selectedTeam={selectedTeam} teamMatches={teamMatches} />
-                    <FixtureList teamMatches={teamMatches} selectedTeam={selectedTeam}/>  
-                  </section>
-                  <section className='right-bar'>
-                    <TableStanding table={table}/>
-                  </section>
-                </div>
-                <Footer />
-                {isModalOpen && (
-                  <Modal onClose={closeModal} />
-                )}
-              </>
-            } />
-          </Routes>
-        </Router>
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Router>
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;
