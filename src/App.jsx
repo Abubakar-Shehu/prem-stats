@@ -39,15 +39,15 @@ function App() {
   const closeModal = () => setIsModalOpen(false);
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
-  // Helper function to get API URL
+  // Empty/undefined VITE_URL means same-origin (Vite/Vercel proxy).
   const getApiUrl = () => {
     const apiUrl = import.meta.env.VITE_URL;
-    if (!apiUrl || apiUrl === 'your_existing_api_url_here') {
+    if (apiUrl === 'your_existing_api_url_here' || apiUrl === 'your_backend_api_url_here') {
       console.error('VITE_URL is not properly configured in .env file');
       setError('API URL not configured. Please check your environment variables.');
       return null;
     }
-    return apiUrl;
+    return apiUrl ?? '';
   };
 
 
@@ -55,7 +55,7 @@ function App() {
     if (isAuthRoute()) return;
 
     const apiUrl = getApiUrl();
-    if (!apiUrl) return;
+    if (apiUrl === null) return;
 
     const url = `${apiUrl}/api/prem`;
     const options = { 
@@ -103,7 +103,7 @@ function App() {
     if (isAuthRoute()) return;
 
     const apiUrl = getApiUrl();
-    if (!apiUrl) return;
+    if (apiUrl === null) return;
 
     const url = `${apiUrl}/api/prem/table`;
     const options = { 
@@ -147,7 +147,7 @@ function App() {
     if (!selectedTeam?.id) return;
 
     const apiUrl = getApiUrl();
-    if (!apiUrl) return;
+    if (apiUrl === null) return;
 
     const team = selectedTeam.id
     const url = `${apiUrl}/api/prem/matches/${team}`;

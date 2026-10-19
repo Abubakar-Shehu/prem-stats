@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://backend-nkn2pg.fly.dev/api/:path*"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "https://backend-nkn2pg.fly.dev/auth/:path*"
+    }
+  ]
+}
