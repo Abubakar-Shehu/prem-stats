@@ -1,0 +1,118 @@
+.player-stats {
+  margin-top: 0.75rem;
+  padding: 0.85rem 0.9rem 1rem;
+  border-radius: 12px;
+  background: rgba(8, 12, 20, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.light-theme .player-stats {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(20, 28, 40, 0.1);
+}
+
+.player-stats-title {
+  margin: 0 0 0.65rem;
+  font-size: 0.98rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.player-stats-empty {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.player-stats-scroll {
+  overflow-x: auto;
+}
+
+.player-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.player-stats-table th,
+.player-stats-table td {
+  padding: 0.45rem 0.35rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.player-stats-table th:nth-last-child(-n + 3),
+.player-stats-table td.stat-num {
+  width: 2.6rem;
+}
+
+.light-theme .player-stats-table th,
+.light-theme .player-stats-table td {
+  border-bottom-color: rgba(20, 28, 40, 0.08);
+}
+
+.player-stats-table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.72;
+  font-weight: 600;
+}
+
+.player-stats-table td.stat-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  text-align: center;
+}
+
+.player-stats-table th:nth-child(n + 3),
+.player-stats-table th:last-child {
+  text-align: center;
+}
+
+.player-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.player-name {
+  font-weight: 600;
+}
+
+.player-position {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(31, 111, 235, 0.2);
+  color: #9ec1ff;
+}
+
+.light-theme .player-position {
+  background: rgba(31, 111, 235, 0.12);
+  color: #1f4b99;
+}
+
+.player-team-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.player-team-crest {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+@media (max-width: 720px) {
+  .player-stats {
+    padding: 0.7rem;
+  }
+
+  .player-stats-table {
+    font-size: 0.82rem;
+  }
+}
