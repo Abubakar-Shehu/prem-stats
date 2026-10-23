@@ -5,6 +5,7 @@ import {
   Footer,
   HomeBar,
   KeyStats,
+  PlayerStats,
   QuickLinks,
   RecentResults,
   SeasonTabs,
@@ -32,6 +33,8 @@ export const HomePage = () => {
   const [table, setTable] = useState([]);
   const [teamMatches, setTeamMatches] = useState([]);
   const [seasons, setSeasons] = useState(DEFAULT_SEASONS);
+  const [players, setPlayers] = useState([]);
+  const [playersLoading, setPlayersLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -221,6 +224,47 @@ export const HomePage = () => {
     };
   }, [selectedTeam, selectedSeason]);
 
+  useEffect(() => {
+    const apiUrl = getApiUrl();
+    if (apiUrl === null) return;
+
+    let cancelled = false;
+    const params = new URLSearchParams({
+      season: String(selectedSeason),
+      limit: selectedTeam?.id ? '40' : '25',
+    });
+    if (selectedTeam?.id) {
+      params.set('team', String(selectedTeam.id));
+    }
+
+    const loadPlayers = async () => {
+      setPlayersLoading(true);
+      try {
+        const response = await fetch(`${apiUrl}/api/prem/players?${params}`, {
+          method: 'GET',
+          credentials: 'include',
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        if (cancelled) return;
+        setPlayers(Array.isArray(result.players) ? result.players : []);
+      } catch (fetchError) {
+        if (cancelled) return;
+        console.error('Error fetching player stats:', fetchError);
+        setPlayers([]);
+      } finally {
+        if (!cancelled) setPlayersLoading(false);
+      }
+    };
+
+    loadPlayers();
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedSeason, selectedTeam]);
+
   const handleTeamChange = (event) => {
     const selectedTeamId = event.target.value;
     const team = teams.find((item) => String(item.id) === selectedTeamId);
@@ -267,6 +311,11 @@ export const HomePage = () => {
         <section className="mid-bar">
           <TeamHeader selectedTeam={selectedTeam} teamMatches={teamMatches} />
           <KeyStats selectedTeam={selectedTeam} teamMatches={teamMatches} />
+          <PlayerStats
+            players={players}
+            selectedTeam={selectedTeam}
+            loading={playersLoading}
+          />
           <FixtureList teamMatches={teamMatches} selectedTeam={selectedTeam} />
         </section>
         <section className="right-bar">

@@ -1,4 +1,5 @@
 import { resolveTeam } from './teamCatalog.js';
+import { getPlayerStats } from './playerStats.js';
 
 const FD_BASE = 'https://api.football-data.org/v4';
 const OPENFOOTBALL_BASE =
@@ -378,6 +379,17 @@ export async function handlePremApi(req, res, url) {
     const matchRoute = url.pathname.match(/^\/api\/prem\/matches\/([^/]+)\/?$/);
     if (matchRoute) {
       return sendJson(res, 200, await getTeamMatches(matchRoute[1], season));
+    }
+
+    if (url.pathname === '/api/prem/players') {
+      return sendJson(
+        res,
+        200,
+        await getPlayerStats(season, {
+          teamId: url.searchParams.get('team'),
+          limit: url.searchParams.get('limit') || 25,
+        })
+      );
     }
 
     return false;

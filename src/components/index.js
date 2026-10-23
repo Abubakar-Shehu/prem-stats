@@ -2,6 +2,7 @@ export { FixtureList } from "./FixtureList";
 export { Footer } from "./Footer";
 export { HomeBar } from "./HomeBar";
 export { KeyStats } from "./KeyStats";
+export { PlayerStats } from "./PlayerStats";
 export { QuickLinks } from "./QuickLinks";
 export { RecentResults } from "./RecentResults";
 export { SeasonTabs } from "./SeasonTabs";
