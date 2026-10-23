@@ -36,10 +36,15 @@
 
 .player-stats-table th,
 .player-stats-table td {
-  padding: 0.45rem 0.4rem;
+  padding: 0.45rem 0.35rem;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   white-space: nowrap;
+}
+
+.player-stats-table th:nth-last-child(-n + 3),
+.player-stats-table td.stat-num {
+  width: 2.6rem;
 }
 
 .light-theme .player-stats-table th,

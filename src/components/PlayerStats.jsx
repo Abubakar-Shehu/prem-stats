@@ -38,9 +38,9 @@ export const PlayerStats = ({ players = [], selectedTeam = null, loading = false
               <th>#</th>
               <th>Player</th>
               {!selectedTeam ? <th>Team</th> : null}
-              <th>Goals</th>
-              <th>Starts</th>
-              <th>Assists</th>
+              <th title="Goals">G</th>
+              <th title="Starts">ST</th>
+              <th title="Assists">A</th>
             </tr>
           </thead>
           <tbody>
