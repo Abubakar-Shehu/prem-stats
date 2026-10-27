@@ -1,5 +1,7 @@
-// Empty VITE_URL uses same-origin /auth proxy (Vite/Vercel → Fly backend).
-const API_BASE_URL = import.meta.env.VITE_URL ?? '';
+import { getApiBaseUrl } from './apiBase';
+
+// Same-origin /auth → Vite proxy / Vercel rewrite → Fly backend.
+const API_BASE_URL = getApiBaseUrl();
 
 async function parseJsonResponse(response) {
   const responseClone = response.clone();

@@ -56,8 +56,8 @@ Copy `.env.example` to `.env`:
 
 | Variable | Purpose |
 |----------|---------|
-| `VITE_URL` | Leave empty to use same-origin API routes |
-| `VITE_PROXY_TARGET` | Fly auth backend (default `https://backend-nkn2pg.fly.dev`) |
+| `VITE_URL` | Leave empty (same-origin `/api` + `/auth`). Do not set to the Fly host |
+| `VITE_PROXY_TARGET` | Fly auth backend for the Vite `/auth` proxy (default `https://backend-nkn2pg.fly.dev`) |
 | `FOOTBALL_DATA_API_KEY` | Optional; prefer football-data.org for teams/table/matches |
 | `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` | Only if calling Supabase from the client |
 
