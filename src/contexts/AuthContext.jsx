@@ -1,8 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
-/* eslint-disable no-useless-catch */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState, useEffect } from 'react';
 import { authApi } from '../lib/authApi';
+import {
+  clearAuthSession,
+  getAccessToken,
+  loadAuthSession,
+  saveAuthSession,
+} from '../lib/authSession';
 
 const AuthContext = createContext();
 
@@ -18,16 +23,37 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if user is logged in on app start
   useEffect(() => {
     checkUser();
   }, []);
 
   const checkUser = async () => {
     try {
-      const data = await authApi.getCurrentUser();
-      setUser(data.user);
+      const stored = loadAuthSession();
+      if (!stored?.user || !stored?.session?.access_token) {
+        setUser(null);
+        return;
+      }
+
+      // Prefer the locally persisted session from sign-in. The Fly /auth/user
+      // route currently does not read bearer tokens, so local storage is the
+      // reliable source of truth until the backend is updated.
+      setUser(stored.user);
+
+      try {
+        const data = await authApi.getCurrentUser(stored.session.access_token);
+        if (data?.user) {
+          saveAuthSession({ user: data.user, session: stored.session });
+          setUser(data.user);
+        }
+      } catch (error) {
+        if (error.code !== 'BACKEND_SESSION_MISSING') {
+          console.warn('Could not refresh user from backend:', error.message);
+        }
+      }
     } catch (error) {
+      console.error('Failed to restore auth session:', error);
+      clearAuthSession();
       setUser(null);
     } finally {
       setLoading(false);
@@ -35,31 +61,32 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signIn = async (email, password) => {
-    try {
-      const data = await authApi.signIn(email, password);
-      setUser(data.user);
-      return data;
-    } catch (error) {
-      throw error;
+    const data = await authApi.signIn(email, password);
+    if (!data?.session?.access_token) {
+      throw new Error('Sign in succeeded but no session was returned. Please try again.');
     }
+    saveAuthSession({ user: data.user, session: data.session });
+    setUser(data.user);
+    return data;
   };
 
   const signUp = async (email, password, username) => {
-    try {
-      const data = await authApi.signUp(email, password, username);
-      // Note: User might not be immediately available after signup due to email verification
-      return data;
-    } catch (error) {
-      throw error;
+    const data = await authApi.signUp(email, password, username);
+    // Email confirmation may mean no session yet.
+    if (data?.session?.access_token && data?.user) {
+      saveAuthSession({ user: data.user, session: data.session });
+      setUser(data.user);
     }
+    return data;
   };
 
   const signOut = async () => {
+    const token = getAccessToken();
     try {
-      await authApi.signOut();
+      await authApi.signOut(token);
+    } finally {
+      clearAuthSession();
       setUser(null);
-    } catch (error) {
-      throw error;
     }
   };
 
@@ -69,7 +96,7 @@ export const AuthProvider = ({ children }) => {
     signIn,
     signUp,
     signOut,
-    checkUser
+    checkUser,
   };
 
   return (

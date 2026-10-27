@@ -52,12 +52,21 @@ export const SignUp = () => {
     }
 
     try {
-      await signUp(email, password, username)
-      
-      // Show success message and redirect
-      alert('Account created successfully! Please check your email for verification.')
-      navigate('/')
-      
+      const data = await signUp(email, password, username)
+
+      if (data?.session) {
+        navigate('/')
+        return
+      }
+
+      // Email confirmation may be required before a session exists.
+      setInfoMessage('Account created successfully! Check your email to verify, then sign in.')
+      navigate('/signin', {
+        state: {
+          email,
+          message: 'Account created! Please verify your email, then sign in.',
+        },
+      })
     } catch (error) {
       setError(error.message)
     } finally {

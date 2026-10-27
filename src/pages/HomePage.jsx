@@ -21,10 +21,6 @@ import {
   seasonLabel,
 } from '../lib/seasons';
 
-const redirectToSignIn = () => {
-  window.location.href = '/signin';
-};
-
 export const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -110,10 +106,6 @@ export const HomePage = () => {
         });
 
         if (!response.ok) {
-          if (response.status === 401) {
-            redirectToSignIn();
-            return;
-          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
@@ -155,10 +147,6 @@ export const HomePage = () => {
         });
 
         if (!response.ok) {
-          if (response.status === 401) {
-            redirectToSignIn();
-            return;
-          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
@@ -200,10 +188,6 @@ export const HomePage = () => {
         });
 
         if (!response.ok) {
-          if (response.status === 401) {
-            redirectToSignIn();
-            return;
-          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 

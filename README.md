@@ -10,7 +10,7 @@ Live site: [prem-stats.vercel.app](https://prem-stats.vercel.app)
 - Favourite-team picker with team crest, recent results, key stats, and fixtures
 - League table standings
 - Player leaderboard: **Goals (G)**, **Starts (ST)**, **Assists (A)** — filters to the selected team
-- Sign in / sign up via the existing Fly auth backend
+- Sign in / sign up via the Fly auth backend (session stored in the browser)
 - Light / dark theme toggle
 
 ## Stack
@@ -73,7 +73,7 @@ Same-origin routes (query `season` is the season start year, e.g. `2026` for 202
 | `GET /api/prem/matches/:teamId?season=2026` | Team matches |
 | `GET /api/prem/players?season=2026&team=:id&limit=25` | Player goals / starts / assists |
 
-Auth stays on the Fly backend via `/auth/*` (Vite proxy / Vercel rewrite).
+Auth stays on the Fly backend via `/auth/*` (Vite proxy / Vercel rewrite). After sign-in, the returned Supabase session is saved in `localStorage` so the header stays signed in across refreshes.
 
 ## Deploy
 
@@ -82,6 +82,7 @@ Configured for **Vercel**:
 - Static frontend from `vite build`
 - Serverless handlers under `api/prem*`
 - `/auth/*` rewritten to the Fly backend (`vercel.json`)
+- SPA fallback so `/signin` and `/signup` serve `index.html`
 
 ## Project layout
 
