@@ -14,6 +14,7 @@ import {
   TeamHeader,
 } from '../components';
 import { Modal } from '../routes/modal';
+import { getApiBaseUrl } from '../lib/apiBase';
 import {
   DEFAULT_SEASONS,
   getDefaultSeasonYear,
@@ -44,15 +45,7 @@ export const HomePage = () => {
   const closeModal = () => setIsModalOpen(false);
   const toggleTheme = () => setIsDarkMode((value) => !value);
 
-  const getApiUrl = () => {
-    const apiUrl = import.meta.env.VITE_URL;
-    if (apiUrl === 'your_existing_api_url_here' || apiUrl === 'your_backend_api_url_here') {
-      console.error('VITE_URL is not properly configured in .env file');
-      setError('API URL not configured. Please check your environment variables.');
-      return null;
-    }
-    return apiUrl ?? '';
-  };
+  const getApiUrl = () => getApiBaseUrl();
 
   useEffect(() => {
     // Keep the URL canonical so season links are shareable.
@@ -63,7 +56,6 @@ export const HomePage = () => {
 
   useEffect(() => {
     const apiUrl = getApiUrl();
-    if (apiUrl === null) return;
 
     const loadSeasons = async () => {
       try {
@@ -89,7 +81,6 @@ export const HomePage = () => {
 
   useEffect(() => {
     const apiUrl = getApiUrl();
-    if (apiUrl === null) return;
 
     let cancelled = false;
     const url = `${apiUrl}/api/prem?season=${selectedSeason}`;
@@ -134,7 +125,6 @@ export const HomePage = () => {
 
   useEffect(() => {
     const apiUrl = getApiUrl();
-    if (apiUrl === null) return;
 
     let cancelled = false;
     const url = `${apiUrl}/api/prem/table?season=${selectedSeason}`;
@@ -175,7 +165,6 @@ export const HomePage = () => {
     if (!selectedTeam?.id) return;
 
     const apiUrl = getApiUrl();
-    if (apiUrl === null) return;
 
     let cancelled = false;
     const url = `${apiUrl}/api/prem/matches/${selectedTeam.id}?season=${selectedSeason}`;
@@ -210,7 +199,6 @@ export const HomePage = () => {
 
   useEffect(() => {
     const apiUrl = getApiUrl();
-    if (apiUrl === null) return;
 
     let cancelled = false;
     const params = new URLSearchParams({
