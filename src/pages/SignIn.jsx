@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import '../styles/SignIn.css'
 
@@ -8,8 +8,19 @@ export const SignIn = () => {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [infoMessage, setInfoMessage] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
   const { signIn } = useAuth()
+
+  useEffect(() => {
+    if (location.state?.email) {
+      setEmail(location.state.email)
+    }
+    if (location.state?.message) {
+      setInfoMessage(location.state.message)
+    }
+  }, [location.state])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -46,6 +57,11 @@ export const SignIn = () => {
         <div className="signin-header">
           <h1>Sign In</h1>
           <p>Welcome back to Premier League Stats</p>
+          {infoMessage && (
+            <div className="info-message">
+              <p>{infoMessage}</p>
+            </div>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="signin-form">
